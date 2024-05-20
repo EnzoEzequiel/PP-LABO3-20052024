@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ABM de Cryptos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="header">
+    <img src="logo.svg" class="logo">
+    <nav>
+      <a href="#">Inicio</a> 
+      <a href="#">Acerca de</a> 
+      <a href="#">Blog</a> 
+      <a href="#">Contacto</a>
+    </nav>
+  </div>
+  <h2>Información de la Moneda</h2>
+  <form id="cryptoForm">
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre" name="nombre" placeholder="Ingrese Nombre ..">
+
+    <label for="simbolo">Simbolo</label>
+    <input type="text" id="simbolo" name="simbolo" placeholder="Ingrese Simbolo ..">
+
+    <label for="precio">Precio Actual (USD)</label>
+    <input type="text" id="precio" name="precio" placeholder="Ingrese Precio ..">
+
+    <label for="consenso">Tipo de Consenso</label>
+    <select id="consenso" name="consenso">
+      <option value="seleccione">Seleccione</option>
+      <option value="tipo1">Tipo 1</option>
+      <option value="tipo2">Tipo 2</option>
+    </select>
+
+    <label for="circulacion">Cantidad en Circulación</label>
+    <input type="text" id="circulacion" name="circulacion" placeholder="Ingrese Cantidad ..">
+
+    <label for="algoritmo">Algoritmo</label>
+    <select id="algoritmo" name="algoritmo">
+      <option value="seleccione">Seleccione</option>
+      <option value="tipo1">Tipo 1</option>
+      <option value="tipo2">Tipo 2</option>
+    </select>
+
+    <label for="sitio">Sitio Web Oficial</label>
+    <input type="text" id="sitio" name="sitio" placeholder="Ingrese Sitio ..">
+
+    <input type="submit" value="Guardar">
+    <input type="submit" value="Cancelar" style="background-color: #f44336;">
+    <input type="submit" value="Eliminar" style="background-color: #e91e63;">
+  </form>
+
+  
+  <table id="tabla">
+    <div id="spinner" class="spinner-container">
+      <img src="logo.svg" class="spinner">
+    </div>   
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Transacción</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  
+  <footer class="footer">
+    <div class="contenedor contenedor-footer">
+        <nav class="navegacion">
+            <a href="nosotros.html">Nosotros</a>
+            <a href="anuncios.html">Anuncios</a>
+            <a href="blog.html">Blog</a>
+            <a href="contacto.html">Contacto</a>
+        </nav>    
+        <p id="copyright" class="copyright">Todos los derechos Reservados <span id="year">&copy;</span></p>       
+    </div>
+  </footer>
+  
+  <script src="script.js"></script>
+</body>
+</html>
