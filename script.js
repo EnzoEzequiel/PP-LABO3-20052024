@@ -1,85 +1,93 @@
-var yearElement = document.getElementById("year");
-        var currentYear = new Date().getFullYear();
-        yearElement.textContent = currentYear;
+// Variables
+const yearElement = document.getElementById("year");
+const currentYear = new Date().getFullYear();
+yearElement.textContent = currentYear;
 
-// CONTROL LISTA DE CRIPTOS
 const tbody = document.querySelector('#tabla tbody');
-tbody.innerHTML = ''; // LIMPIAR COLUMNAS
-
-
-// llenar consenso
 const consensoSelect = document.getElementById('consenso');
-consensoSelect.innerHTML = '';
-['Seleccione', 'Proof of Work', 'Proof of Stake'].forEach(option => {
-  const opt = document.createElement('option');
-  opt.value = option.toLowerCase().replace(/\s/g, ''); // Convert to lowercase and remove spaces
-  opt.textContent = option;
-  consensoSelect.appendChild(opt);
-});
-
-// LLENAR ALGORITMO
 const algoritmoSelect = document.getElementById('algoritmo');
-algoritmoSelect.innerHTML = '';
-['Seleccione', 'SHA-256', 'Ethash', 'Scrypt', 'X11'].forEach(option => {
-  const opt = document.createElement('option');
-  opt.value = option.toLowerCase().replace(/\s/g, ''); // LOWER CASE Y BORRO LOS ESPACIOS
-  opt.textContent = option;
-  algoritmoSelect.appendChild(opt);
-});
-
-cryptos.forEach(crypto => {
-  const row = tbody.insertRow();
-  row.insertCell(0).textContent = crypto.id;
-  row.insertCell(1).textContent = crypto.nombre;
-  row.insertCell(2).textContent = crypto.simbolo;
-  //EVENTO PARA CADA FILA
-  row.addEventListener('click', () => {
-    // POBLAR COLUMNASSSSS
-    document.getElementById('nombre').value = crypto.nombre;
-    document.getElementById('simbolo').value = crypto.simbolo;
 
 
-
-
-
-
+function populateSelect(selectElement, options) {
+  selectElement.innerHTML = '';
+  options.forEach(option => {
+    const opt = document.createElement('option');
+    opt.value = option.toLowerCase().replace(/\s/g, '');
+    opt.textContent = option;
+    selectElement.appendChild(opt);
   });
-});
+}
 
-//VALIDACIONES
+function clearTable() {
+  tbody.innerHTML = '';
+}
+
+function renderCryptoData(cryptos) {
+  cryptos.forEach(crypto => {
+    const row = tbody.insertRow();
+    row.insertCell(0).textContent = crypto.id;
+    row.insertCell(1).textContent = crypto.nombre;
+    row.insertCell(2).textContent = crypto.simbolo;
+    
+    row.addEventListener('click', () => {
+      document.getElementById('nombre').value = crypto.nombre;
+      document.getElementById('simbolo').value = crypto.simbolo;
+      
+    });
+  });
+}
+
+function deleteAllCryptos() {
+  if (confirm("¿Está seguro de que desea eliminar todas las monedas?")) {
+    clearTable();
+  }
+}
+
 function validarFormulario() {
   var verificar = true;
   var nombres = document.getElementById("nombre").value;
   var simbolo = document.getElementById("simbolo").value;
 
-  if (!nombres || !simbolo || !precio || !circulacion || !consenso || !algoritmo || !sitio) 
-  {
+  if (!nombres || !simbolo) {
       alert("Por favor complete todos los campos correctamente.");
       verificar = false;
   }
-
-  if (verificar) {
-    mostrarSpinner(); 
-    setTimeout(function() {
-      spinner.style.display = 'none';
-    }, 2000);
-    guardarDatos();
-    ocultarSpinner(); 
-  }
+  return verificar;
 }
-//SPINNER
+
+
 function mostrarSpinner() {
   var spinner = document.getElementById('spinner');
   spinner.style.display = 'flex';
-  setTimeout(function() {
-      spinner.style.display = 'none';
-  }, 2000);
 }
 
 function ocultarSpinner() {
   var spinner = document.getElementById('spinner');
   spinner.style.display = 'none';
 }
+
+
+window.onload = function() {
+
+  populateSelect(consensoSelect, ['Seleccione', 'Proof of Work', 'Proof of Stake']);
+  populateSelect(algoritmoSelect, ['Seleccione', 'SHA-256', 'Ethash', 'Scrypt', 'X11']);
+
+
+  var formulario = document.getElementById('cryptoForm');
+  formulario.addEventListener('submit', function(event) {
+      event.preventDefault();
+      if (validarFormulario()) {
+        mostrarSpinner();
+        setTimeout(() => {
+          guardarDatos();
+          ocultarSpinner();
+        }, 2500); 
+      }
+  });
+
+  var eliminarTodosBtn = document.getElementById('eliminarTodos');
+  eliminarTodosBtn.addEventListener('click', deleteAllCryptos);
+};
 
 function guardarDatos() {
   var nombres = document.getElementById("nombre").value;
@@ -92,13 +100,4 @@ function guardarDatos() {
   
   document.getElementById("nombre").value = "";
   document.getElementById("simbolo").value = "";
-  
 }
-
-window.onload = function() {
-  var formulario = document.getElementById('cryptoForm');
-  formulario.addEventListener('submit', function(event) {
-      event.preventDefault();
-      validarFormulario();
-  });
-};
