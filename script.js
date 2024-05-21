@@ -90,14 +90,30 @@ window.onload = function() {
 };
 
 function guardarDatos() {
-  var nombres = document.getElementById("nombre").value;
+  var nombre = document.getElementById("nombre").value;
   var simbolo = document.getElementById("simbolo").value;
+  var fechaCreacion = document.getElementById("fechaCreacion").value; 
+  var precioActual = document.getElementById("precioActual").value; 
+  var cantidadCirculacion = document.getElementById("cantidadCirculacion").value; 
+  var algoritmo = document.getElementById("algoritmo").value; 
+  var sitioWeb = document.getElementById("sitioWeb").value; 
 
   var tabla = document.getElementById('tabla').querySelector('tbody');
   var row = tabla.insertRow();
-  row.insertCell(0).textContent = nombres;
+  row.insertCell(0).textContent = nombre;
   row.insertCell(1).textContent = simbolo;
-  
+  row.insertCell(2).textContent = fechaCreacion;
+  row.insertCell(3).textContent = precioActual;
+  row.insertCell(4).textContent = cantidadCirculacion;
+  row.insertCell(5).textContent = algoritmo;
+  row.insertCell(6).textContent = sitioWeb;
+
+  // limpiar luego de guardar
   document.getElementById("nombre").value = "";
   document.getElementById("simbolo").value = "";
+  document.getElementById("fechaCreacion").value = "";
+  document.getElementById("precioActual").value = "";
+  document.getElementById("cantidadCirculacion").value = "";
+  document.getElementById("algoritmo").value = "";
+  document.getElementById("sitioWeb").value = "";
 }
