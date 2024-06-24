@@ -89,6 +89,7 @@ function manejadorCargarRegistro(e) {
   console.log("entro a manejador de cargas de registros");
   const nombre = document.getElementById("nombre").value;
   const simbolo = document.getElementById("simbolo").value;
+
   const precio = document.getElementById("precio").value;
   const consenso = document.getElementById("consenso").value;
   const circulacion = document.getElementById("circulacion").value;
@@ -97,9 +98,10 @@ function manejadorCargarRegistro(e) {
   console.log("termino de leer values");
   
   if (validarParametros(nombre, simbolo, precio, consenso, circulacion, algoritmo, sitioWeb)) {
+    const fechaCreacion = new Date().toISOString();
     console.log(sitioWeb);
     console.log(nombre);
-    const nuevaCrypto =new Crypto ( nombre, simbolo, precio, consenso, circulacion, algoritmo, sitioWeb );
+    const nuevaCrypto =new Crypto ( nombre, simbolo,fechaCreacion, precio, consenso, circulacion, algoritmo, sitioWeb );
     console.log('crypto dado de alta correctamente');
     items.push(nuevaCrypto);
     escribirStorage('Cryptos', objectToJson(items));
